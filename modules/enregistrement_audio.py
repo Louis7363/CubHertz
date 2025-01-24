@@ -6,8 +6,8 @@ class Audio :
     def __init__(self):
         self.format = pyaudio.paInt16 #format sur 16 bits
         self.channels = 2 #nombres de cannaux d'entrées
-        self.rate = 44100 # Spécifie le taux souhaité en Hz
-        self.chunk = 1024 #nombre d'échantillons collectés par seconde
+        self.rate = 44100 # Spécifie le taux souhaité en Hz,  44 100 échantillons sont capturés chaque seconde
+        self.chunk = 1024 #nombre d'échantillons correspondant à un bloc
         self.record_seconds = 5 #nombres de secondes d'écoute
         self.filename = self.creer_nom() #fonction pour créer un nom de fichier
     def creer_nom(self) :
@@ -23,9 +23,9 @@ class Audio :
         print("Enregistrement en cours...")
         
         frames = []
-        
+        #en divisant self.rate par self.chunk on obtient le nombre de frame nécessaire par secondes puis on multiplie par le nombre de secondes souhaités pour avoir le nombre de frame permettant de durer le temps souhaité
         for i in range(0, int(self.rate / self.chunk * self.record_seconds)):
-            data = stream.read(self.chunk)
+            data = stream.read(self.chunk) #lis un bloc de l'audio de la taille de chunk soit 1024 par secondes
             frames.append(data)
             
         print("Fin d'enregistrement")
