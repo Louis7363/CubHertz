@@ -1,15 +1,19 @@
 import pyaudio
 import wave
-
+import datetime
 class Audio :
     """Class Audio ayant comme méthode : enregistrement_audio qui permet d'enregister un audio"""
-    def __init__(self,name):
+    def __init__(self):
         self.format = pyaudio.paInt16 #format sur 16 bits
         self.channels = 2 #nombres de cannaux d'entrées
         self.rate = 44100 # Spécifie le taux souhaité en Hz
         self.chunk = 1024 #nombre d'échantillons collectés par seconde
         self.record_seconds = 5 #nombres de secondes d'écoute
-        self.filename = name #nom donné au fichier
+        self.filename = self.creer_nom() #fonction pour créer un nom de fichier
+    def creer_nom(self) :
+        filename = 'tests/audios/' + datetime.datetime.now().strftime("%Y%m%d%H%M%S%f") +'.wav'
+        return filename
+
     def enregistrer_audio(self) :
         audio = pyaudio.PyAudio()
         # Debut enregistrement
