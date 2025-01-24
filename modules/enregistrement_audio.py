@@ -10,7 +10,7 @@ class Audio :
         self.chunk = 1024 #nombre d'échantillons collectés par seconde
         self.record_seconds = 5 #nombres de secondes d'écoute
         self.filename = name #nom donné au fichier
-    def enregistrement_audio(self) :
+    def enregistrer_audio(self) :
         audio = pyaudio.PyAudio()
         # Debut enregistrement
         stream = audio.open(format=self.format, channels=self.channels,
@@ -29,8 +29,8 @@ class Audio :
         stream.stop_stream()
         stream.close()
         audio.terminate()
-        self.enregistrement_fichier(audio,frames)
-    def enregistrement_fichier(self,audio,frames) :
+        self.enregistrer_fichier(audio,frames)
+    def enregistrer_fichier(self,audio,frames) :
         waveFile = wave.open(self.filename, 'wb')
         waveFile.setnchannels(self.channels) #défini le nombre de canaux
         waveFile.setsampwidth(audio.get_sample_size(self.format)) #définit la largeur de de l'échantillon sur 16 bits(format défini dans l'initialisation de la classe)
@@ -38,5 +38,3 @@ class Audio :
         waveFile.writeframes(b''.join(frames)) #écrit les frames de l'audio
         waveFile.close()
 
-audio1 = Audio("test.wav")
-audio1.enregistrement_audio()
