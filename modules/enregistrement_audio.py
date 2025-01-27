@@ -10,6 +10,7 @@ class Audio :
         self.chunk = 1024 #nombre d'échantillons correspondant à un bloc
         self.record_seconds = 5 #nombres de secondes d'écoute
         self.filename = self.creer_nom() #fonction pour créer un nom de fichier
+
     def creer_nom(self) :
         filename = 'tests/audios/' + datetime.datetime.now().strftime("%Y%m%d%H%M%S%f") +'.wav'
         return filename
@@ -34,6 +35,7 @@ class Audio :
         stream.close()
         audio.terminate()
         self.enregistrer_fichier(audio,frames)
+
     def enregistrer_fichier(self,audio,frames) :
         waveFile = wave.open(self.filename, 'wb')
         waveFile.setnchannels(self.channels) #défini le nombre de canaux
@@ -41,4 +43,3 @@ class Audio :
         waveFile.setframerate(self.rate)  #règle la fréquence d'image sur 44100 Hz (defini dans l'initialisation de la classe)
         waveFile.writeframes(b''.join(frames)) #écrit les frames de l'audio
         waveFile.close()
-
