@@ -12,7 +12,6 @@ print(audio_signal)
 print('Sampling Rate:', sampling_rate)
 print('Audio Shape:', np.shape(audio_signal))
 
-# Nombre d'échantillons
 num_samples = audio_signal.shape[0]
 print(num_samples)
 # Durée de l'audio
@@ -23,25 +22,27 @@ print(audio_duration)
 time_axis = np.linspace(0, audio_duration, num_samples) #tableau de valeur représentant le temps allant de 0 à la longueur total du temps de l'audio espacé avec num_samples
 print(time_axis)
 
-
-"""plt.subplot(2,1,1)
+plt.subplot(2,1,1)
 plt.plot(time_axis, audio_signal, 'b-') #audio signal correspond à l'amplitude du son dans le stéréo gauche et le stéréo droit"""
-
+plt.show()
 
 def renvoyer_SignalAudio(fichier) :
     """Renvoie un tableau contenant toutes les amplitude de l'audio"""
     file_path = fichier
-    sampling_rate, audio_signal = wavfile.read(file_path)   
-    return(audio_signal)
+    sampling_rate, audio_signal = wavfile.read(file_path) 
+    nombres_echantillons = audio_signal.shape[0]
+    durée = nombres_echantillons / sampling_rate  
+
+    return(audio_signal,nombres_echantillons,durée)
 
 
 
 """plt.ylabel('Gauche')
 plt.xlabel('Temps (s)')
-plt.show()"""
+plt.show()
 fr, tm, spgram = signal.spectrogram(audio_signal,sampling_rate)
 lspg = np.log(spgram)
-"""plt.pcolormesh(tm,fr,lspg,shading='auto')
+plt.pcolormesh(tm,fr,lspg,shading='auto')
 plt.ylabel('Frequency (Hz)')
 plt.xlabel('Time (sec)')
 plt.show()"""
