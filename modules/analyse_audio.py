@@ -1,18 +1,47 @@
-# Beat tracking example
-import librosa
+# Importer les modules
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.io import wavfile
+from scipy import signal
+from pydub import AudioSegment
 
-# 1. Get the file path to an included audio example
-filename = librosa.example('nutcracker')
+# Importer le fichier audio .wav
+file_path = "tests/audios/20250131112752672100.wav"
+sampling_rate, audio_signal = wavfile.read(file_path)
+print(audio_signal)
+print('Sampling Rate:', sampling_rate)
+print('Audio Shape:', np.shape(audio_signal))
+
+# Nombre d'échantillons
+num_samples = audio_signal.shape[0]
+print(num_samples)
+# Durée de l'audio
+audio_duration = num_samples / sampling_rate
+print(audio_duration)
+
+# Tracer le signal en fonction du temps
+time_axis = np.linspace(0, audio_duration, num_samples) #tableau de valeur représentant le temps allant de 0 à la longueur total du temps de l'audio espacé avec num_samples
+print(time_axis)
 
 
-# 2. Load the audio as a waveform `y`
-#    Store the sampling rate as `sr`
-y, sr = librosa.load(filename)
+"""plt.subplot(2,1,1)
+plt.plot(time_axis, audio_signal, 'b-') #audio signal correspond à l'amplitude du son dans le stéréo gauche et le stéréo droit"""
 
-# 3. Run the default beat tracker
-tempo, beat_frames = librosa.beat.beat_track(y=y, sr=sr)
 
-print('Estimated tempo: {:.2f} beats per minute'.format(tempo))
+def renvoyer_SignalAudio(fichier) :
+    """Renvoie un tableau contenant toutes les amplitude de l'audio"""
+    file_path = fichier
+    sampling_rate, audio_signal = wavfile.read(file_path)   
+    return(audio_signal)
 
-# 4. Convert the frame indices of beat events into timestamps
-beat_times = librosa.frames_to_time(beat_frames, sr=sr)
+
+
+"""plt.ylabel('Gauche')
+plt.xlabel('Temps (s)')
+plt.show()"""
+fr, tm, spgram = signal.spectrogram(audio_signal,sampling_rate)
+lspg = np.log(spgram)
+"""plt.pcolormesh(tm,fr,lspg,shading='auto')
+plt.ylabel('Frequency (Hz)')
+plt.xlabel('Time (sec)')
+plt.show()"""

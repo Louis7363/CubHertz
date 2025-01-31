@@ -5,7 +5,7 @@ class Audio :
     """Class Audio ayant comme méthode : enregistrement_audio qui permet d'enregister un audio"""
     def __init__(self):
         self.format = pyaudio.paInt16 #format sur 16 bits
-        self.channels = 2 #nombres de cannaux d'entrées
+        self.channels = 1 #nombres de cannaux d'entrées
         self.rate = 44100 # Spécifie le taux souhaité en Hz,  44 100 échantillons sont capturés chaque seconde
         self.chunk = 1024 #nombre d'échantillons correspondant à un bloc
         self.record_seconds = 5 #nombres de secondes d'écoute
