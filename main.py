@@ -24,4 +24,11 @@ signal_audio_amplitude, nombre_echantillons, durée = analyse_audio.renvoyer_Sig
 max = max(signal_audio_amplitude)
 screen = fondQuiChangeDeCouleur.ecran(0,0,0,signal_audio_amplitude)
 screen.lancer()
+<<<<<<< Updated upstream
 
+=======
+end1 = time.time()
+print("Temps d'execution : " + str(end1-start1))
+
+Interface1.supprimer_fichier()
+>>>>>>> Stashed changes

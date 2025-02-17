@@ -1,4 +1,5 @@
 import customtkinter as ctk
+import os
 
 """app = ctk.CTk()
 app.title('OeuvreVisuelVocal')
@@ -32,4 +33,18 @@ class Interface :
         self.app.grid_columnconfigure(0,weight=1)
         self.app.title(self.title)
         self.app.geometry(self.geometry)
+<<<<<<< Updated upstream
         self.app.mainloop()
+=======
+        self.app.mainloop()
+
+    def supprimer_fichier(self) :
+        filename = self.audio.filename
+        print()
+        try :
+            os.remove(filename)
+            print(f"le fichier '{filename}' a bien été supprimé")
+        
+        except FileNotFoundError:
+            print(f"le fichier '{filename}' n a pas été trouvé")
+>>>>>>> Stashed changes
