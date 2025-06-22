@@ -1,4 +1,4 @@
-# Polymnia
+# CubHertz
 
 ## Installation des dépendances du projet :
 + `pip install -r requirements.txt`
