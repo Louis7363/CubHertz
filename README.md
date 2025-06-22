@@ -1,4 +1,4 @@
-# CubHertz
+# CubHertz (prix art et informatique des trophées NSI de l'académie de Clermont-Ferrand)
 
 ## Installation des dépendances du projet :
 + `pip install -r requirements.txt`
